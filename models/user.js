@@ -24,9 +24,9 @@ class User {
     )
     if (result.rows[0]){
       return result.rows[0]
-    } else {
-      throw new expressError(`Unable to register account with username ${username}`, 400)
     }
+    throw new expressError(`Unable to register account with username ${username}`, 400)
+    
   }
 
   /** Authenticate: is this username/password valid? Returns boolean. */

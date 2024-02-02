@@ -19,7 +19,7 @@ router.post('/login', async (req,res,next) => {
     if(signedIn){
         await User.updateLoginTimestamp(username);
         const token = jwt.sign({username}, SECRET_KEY);
-        return res.json(token);
+        return res.json({token});
     }
     throw new expressError('invlaid username/password', 400)
     }catch(err){
@@ -38,7 +38,7 @@ router.post('/register', async (req,res,next) => {
     try{
         const user = await User.register(req.body)
         const token = jwt.sign({ username: user.username }, SECRET_KEY);
-        return res.json(token);
+        return res.json({token});
     } catch(err){
         if (err.code === '23502'){
             return next(new expressError('missing parameters', 400))

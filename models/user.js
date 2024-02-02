@@ -26,7 +26,6 @@ class User {
       return result.rows[0]
     }
     throw new expressError(`Unable to register account with username ${username}`, 400)
-    
   }
 
   /** Authenticate: is this username/password valid? Returns boolean. */
@@ -54,10 +53,9 @@ class User {
       RETURNING username, last_login_at`,
       [username]
     );
-    if(result.rows[0]){
-      return result.rows[0]
+    if(!result.rows[0]){
+      throw new expressError(`No user with username ${username}`)
     }
-    throw new expressError(`No user with username ${username}`)
    }
 
   /** All: basic info on all users:

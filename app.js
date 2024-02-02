@@ -7,10 +7,12 @@ const { authenticateJWT } = require("./middleware/auth");
 
 const ExpressError = require("./expressError")
 const app = express();
+const morgan = require('morgan')
 
 // allow both form-encoded and json body parsing
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(morgan('dev'))
 
 // allow connections to all routes from any browser
 app.use(cors());
